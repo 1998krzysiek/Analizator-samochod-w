@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Ekspert</h1>
+
+    <p>Witam, z tej strony Mirek, słuchaj sytuacja wygląda następująco: <br>
+    przed tobą jest śmieszne pole tekstowe, do którego możesz wprowadzać swoje odpowiedzi <br>
+  naciśnij przycisk wyślij, by odpowiedzieć na moje pytanie.<br>
+Uważaj, jestem strasznie tępy, jeżeli obok pytania będzie nawias, to oznacza, że reaguje tylko na te, a nie inne odpowiedzi</p>
+  <p>Zacznijmy więc! <br>
+    Więc tak jak już mówiłem jestem Mirek, a ty? </p>
+    <input type="text" name="nazwa" size="40">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form }}
+    <button type="rodzaj">Wyślij</button>
+    </form>
+
+
+{% endblock %}

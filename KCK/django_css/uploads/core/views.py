@@ -20,6 +20,10 @@ def contact(request):
     print('Contact')
     return render(request, 'contact.html')
 
+def ekspert(request):
+    print('Ekspert')
+    return render(request, 'ekspert.html')
+
 
 def data_analysis(request):
     print('Data analysis')
@@ -63,15 +67,3 @@ def data_analysis(request):
                        'df': df.to_html()})
 
     return render(request, 'data_analysis.html')
-
-
-def r_xor_p(x, y, r_xor_p='r'):
-    ''' Pearson's r or its p
-    Depending of what you would like to get.
-    '''
-    r, p = stats.pearsonr(x, y)
-
-    if r_xor_p == 'r':
-        return r
-    else:
-        return p
