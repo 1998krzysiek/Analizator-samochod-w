@@ -18,52 +18,26 @@ def about(request):
 
 def contact(request):
     print('Contact')
+
     return render(request, 'contact.html')
 
 def ekspert(request):
     print('Ekspert')
+    if request.method == 'POST':
+        print('Form')
+
+        bot_message = request.POST.get("bot_message")
+        print(bot_message)
+        if bot_message == '3000':
+            skrypt= "<p> Polecany samochód,to Toyota Yaris I Generacji</p> <img src=\"/static/img/3000.png\" >"
+        if bot_message == '5000':
+            skrypt= "<p> Polecany samochód,to Toyota Avensis I Generacji</p> <img src=\"/static/img/5000.jpg\" > "
+        print(skrypt)
+        # form = bot_message(request.POST)
+        # print('\n\n' + form.data["bot_message"] + '\n\n')
+        # print form.data['bot_message']
+        # if form.is_valid():
+        #     print form.cleaned_data['bot bot_message']
+        #     print form.instane.bot_message
+        return render(request, 'ekspert.html', {'result_present': True, 'skrypt': skrypt})
     return render(request, 'ekspert.html')
-
-
-def data_analysis(request):
-    print('Data analysis')
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-
-        print('\nWhat is `myfile`?')
-        print(type(myfile))
-
-        print('\nDirectly accessing `myfile` gives nothing :(')
-        print(type(str(myfile.read())))
-        print(str(myfile.read()))
-
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        print('\nHowever, when using FileSystemStorage...')
-        print('\nReading filename: %s' % filename)
-        print(type(fs.open(filename)))
-        print(fs.open(filename))
-
-        print('\nOpen and preview using pandas:')
-        df = pd.read_csv(fs.open(filename))
-        print(df)
-
-        print('\nOr with CSV module:')
-        with fs.open(filename, 'rt') as csvfile:
-            readCSV = csv.reader(csvfile, delimiter=',')
-            for row in readCSV:
-                print(row)
-
-        print('Data analysis')
-        r_table = df.apply(lambda x: df.apply(lambda y: r_xor_p(x, y,
-                                                                r_xor_p='r')))
-        p_table = df.apply(lambda x: df.apply(lambda y: r_xor_p(x, y,
-                                                                r_xor_p='p')))
-
-        return render(request, 'data_analysis.html',
-                      {'result_present': True,
-                       'results': {'r_table': r_table.to_html(),
-                                   'p_table': p_table.to_html()},
-                       'df': df.to_html()})
-
-    return render(request, 'data_analysis.html')

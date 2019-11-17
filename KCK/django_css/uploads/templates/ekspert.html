@@ -9,12 +9,16 @@
 Uważaj, jestem strasznie tępy, jeżeli obok pytania będzie nawias, to oznacza, że reaguje tylko na te, a nie inne odpowiedzi</p>
   <p>Zacznijmy więc! <br>
     Więc tak jak już mówiłem jestem Mirek, a ty? </p>
-    <input type="text" name="nazwa" size="40">
-    <form method="POST">
+
+    <form method="post" enctype="multipart/form-data"">
       {% csrf_token %}
-      {{ form }}
-    <button type="rodzaj">Wyślij</button>
+      <input type="text" name="bot_message" size="40">
+      <input type="submit" value="Send">
     </form>
 
+
+    {% if result_present %}
+      {{ skrypt|safe }}
+    {% endif %}
 
 {% endblock %}
