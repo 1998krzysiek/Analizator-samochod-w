@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Ekspert</h1>
+
+    <p>Cześć, z tej strony Mirek, jestem tutaj, by pomóc Ci odpowiedzieć na ważne pytanie:<br>
+      <p>Jaki model auta wybrać?</p><br>
+    <P> Słuchaj sytuacja wygląda następująco: <br>
+    przed tobą jest śmieszne pole tekstowe, do którego możesz wpisać ile pieniędzy chcesz przeznaczyć na auto.<br>
+    Generator zaproponuje Ci konkretny model auta. Dzięki temu wiesz już czego szukasz!<br>
+  </p>
+  <p>Zacznijmy więc! <br>
+     </p>
+
+    <form method="post" enctype="multipart/form-data"">
+      {% csrf_token %}
+      <input type="number" name="bot_message" size="40">
+      <button type="submit" value="Send">Wyślij</button>
+    </form>
+
+
+    {% if result_present %}
+      {{ skrypt|safe }}
+    {% endif %}
+
+{% endblock %}
